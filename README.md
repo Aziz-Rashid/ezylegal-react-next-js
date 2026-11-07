@@ -1,42 +1,61 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ezyLegal — Legal Services Platform (Frontend)
 
-## Getting Started
+Next.js and TypeScript frontend for a platform that connects clients with lawyers: browse legal services by category, book and pay for consultations, read the blog, and join the lawyer network.
 
-First, fetch static data from wordpress:
+## Features
+
+- **Service catalogue** — dynamic category pages (`/category/[categorySlug]`)
+- **Checkout** — online payments with Razorpay and Paytm, plus a purchase summary page
+- **Dashboard** — user dashboard after booking
+- **Lawyer onboarding** — "Join our network" flow with validated multi-field forms
+- **Forms** — React Hook Form with Yup validation, OTP input, file uploads (react-dropzone), date picker
+- **Content** — blog and static pages, with data pulled from WordPress at build time
+- **Support** — Zendesk chat widget
+- **State** — Redux with redux-thunk and redux-persist
+
+## Tech stack
+
+Next.js 10 · TypeScript · React · Redux · React Hook Form · Yup · styled-components · React Bootstrap · Razorpay · Paytm · Zendesk
+
+## Getting started
 
 ```bash
-npm run fetch-data
-# or
-yarn fetch-data
-```
-
-Second, run the development server:
-
-```bash
+npm install
+npm run fetch-data   # pull static data from WordPress
 npm run dev
-# or
-yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Then open http://localhost:3000.
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+### Environment variables
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Create a `.env.local` file (never commit it):
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```env
+APP_NAME=ezyLegal
+RAZORPAY_KEY_ID=your_razorpay_test_key_id
+RAZORPAY_SECRET=your_razorpay_test_secret
+```
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Command | What it does |
+| --- | --- |
+| `npm run fetch-data` | Fetch static data from WordPress into `json-data/` |
+| `npm run dev` | Start the development server |
+| `npm run build` | Build for production |
+| `npm start` | Run the production build |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+api/          API helpers
+components/   UI components
+constants/    Shared constants
+dtos/         TypeScript data types
+json-data/    Data fetched from WordPress
+pages/        Routes: home, category, blogs, checkout, dashboard, join-our-network
+redux/        Store, actions and reducers
+styled/ theme/ styles/   Styling
+utils/        Utilities
+```
